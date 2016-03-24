@@ -12,7 +12,7 @@ use yii\db\ActiveRecord;
  * @property integer $attribute_id
  * @property string $value
  *
- * @property Attribute $attribute
+ * @property Attribute $productAttribute
  * @property Product $product
  */
 class Value extends ActiveRecord
@@ -54,7 +54,7 @@ class Value extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAttribute()
+    public function getProductAttribute()
     {
         return $this->hasOne(Attribute::className(), ['id' => 'attribute_id']);
     }

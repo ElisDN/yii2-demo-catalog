@@ -20,7 +20,7 @@ use yii\db\ActiveRecord;
  * @property ProductTag[] $productTags
  * @property Tag[] $tags
  * @property Value[] $values
- * @property Attribute[] $attributes
+ * @property Attribute[] $productAttributes
  */
 class Product extends ActiveRecord
 {
@@ -96,7 +96,7 @@ class Product extends ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAttributes()
+    public function getProductAttributes()
     {
         return $this->hasMany(Attribute::className(), ['id' => 'attribute_id'])->viaTable('{{%value}}', ['product_id' => 'id']);
     }
