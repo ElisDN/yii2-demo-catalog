@@ -31,6 +31,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => Category::find()->select(['name', 'id'])->indexBy('id')->column(),
                 'value' => 'parent.name',
             ],
+            [
+                'label' => 'Products',
+                'attribute' => 'products_count',
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

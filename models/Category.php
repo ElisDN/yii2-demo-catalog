@@ -18,6 +18,8 @@ use yii\db\ActiveRecord;
  */
 class Category extends ActiveRecord
 {
+    public $products_count;
+
     /**
      * @inheritdoc
      */
