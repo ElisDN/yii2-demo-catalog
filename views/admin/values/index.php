@@ -1,5 +1,7 @@
 <?php
 
+use app\models\Attribute;
+use app\models\Product;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -24,7 +26,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
 
             'product_id',
-            'attribute_id',
+            [
+                'attribute' => 'attribute_id',
+                'filter' => Attribute::find()->select(['name', 'id'])->indexBy('id')->column(),
+            ],
             'value',
 
             ['class' => 'yii\grid\ActionColumn'],

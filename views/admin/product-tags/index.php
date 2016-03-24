@@ -1,5 +1,7 @@
 <?php
 
+use app\models\Product;
+use app\models\Tag;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -23,8 +25,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
 
-            'product_id',
-            'tag_id',
+            [
+                'attribute' => 'product_id',
+                'filter' => Product::find()->select(['name', 'id'])->indexBy('id')->column(),
+            ],
+            [
+                'attribute' => 'tag_id',
+                'filter' => Tag::find()->select(['name', 'id'])->indexBy('id')->column(),
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

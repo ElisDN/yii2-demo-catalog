@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Category;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -24,7 +25,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
 
             'id',
-            'category_id',
+            [
+                'attribute' => 'category_id',
+                'filter' => Category::find()->select(['name', 'id'])->indexBy('id')->column(),
+            ],
             'name',
             'content:ntext',
             'price',
