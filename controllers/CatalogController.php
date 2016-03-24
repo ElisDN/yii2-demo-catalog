@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Category;
 use app\models\Product;
+use app\models\Tag;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -35,9 +36,18 @@ class CatalogController extends Controller
         ]);
     }
 
-    public function actionTag()
+    public function actionTag($name)
     {
-        return $this->render('tag');
+        $tag = $this->findTagModel($name);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => Product::find()->active()->forTag($tag->id)->orderBy(['id' => SORT_DESC]),
+        ]);
+
+        return $this->render('tag', [
+            'tag' => $tag,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     public function actionView()
@@ -53,6 +63,20 @@ class CatalogController extends Controller
     protected function findCategoryModel($id)
     {
         if (($model = Category::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    /**
+     * @param string $name
+     * @return Tag the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findTagModel($name)
+    {
+        if (($model = Tag::findOne(['name' => $name])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

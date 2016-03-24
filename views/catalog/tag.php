@@ -1,9 +1,24 @@
 <?php
-/* @var $this yii\web\View */
-?>
-<h1>catalog/tag</h1>
 
-<p>
-    You may change the content of this page by modifying
-    the file <code><?= __FILE__; ?></code>.
-</p>
+use yii\helpers\Html;
+use yii\widgets\ListView;
+
+/* @var $this yii\web\View */
+/* @var $tag app\models\Category */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
+$this->title = $tag->name;
+
+$this->params['breadcrumbs'][] = ['label' => 'Catalog', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
+?>
+<div class="catalog-index">
+
+    <h1><?= Html::encode($this->title) ?></h1>
+
+    <?= ListView::widget([
+        'dataProvider' => $dataProvider,
+        'layout' => "{items}\n{pager}",
+        'itemView' => '_item',
+    ]); ?>
+</div>

@@ -2,6 +2,7 @@
 
 namespace app\models\query;
 use app\models\Category;
+use app\models\ProductTag;
 use yii\db\ActiveQuery;
 
 /**
@@ -28,6 +29,15 @@ class ProductQuery extends ActiveQuery
             $ids = array_merge($ids, $childrenIds);
         }
         return $this->andWhere(['category_id' => array_unique($ids)]);
+    }
+
+    /**
+     * @param integer $id
+     * @return self
+     */
+    public function forTag($id)
+    {
+        return $this->joinWith(['productTags'], false)->andWhere([ProductTag::tableName() . '.tag_id' => $id]);
     }
 
     /**
