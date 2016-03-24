@@ -1,5 +1,7 @@
 <?php
 
+use yii\data\ActiveDataProvider;
+use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
@@ -40,5 +42,22 @@ $this->params['breadcrumbs'][] = $this->title;
             'active',
         ],
     ]) ?>
+
+    <?= GridView::widget([
+        'dataProvider' => new ActiveDataProvider(['query' => $model->getValues()]),
+        'columns' => [
+
+            [
+                'attribute' => 'attribute_id',
+                'value' => 'productAttribute.name',
+            ],
+            'value',
+
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'controller' => 'admin/values',
+            ],
+        ],
+    ]); ?>
 
 </div>
