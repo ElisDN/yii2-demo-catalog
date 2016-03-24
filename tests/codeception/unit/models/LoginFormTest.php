@@ -4,7 +4,7 @@ namespace tests\codeception\unit\models;
 
 use Yii;
 use yii\codeception\TestCase;
-use app\models\LoginForm;
+use app\models\form\LoginForm;
 use Codeception\Specify;
 
 class LoginFormTest extends TestCase
