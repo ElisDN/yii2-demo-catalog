@@ -2,9 +2,12 @@
 
 namespace app\controllers\admin;
 
+use app\models\Attribute;
+use app\models\Value;
 use Yii;
 use app\models\Product;
 use app\models\admin\search\ProductSearch;
+use yii\base\Model;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -84,11 +87,36 @@ class ProductsController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        /** @var Value[] $values */
+        $values = $model->getValues()->with('productAttribute')->indexBy('attribute_id')->all();
+        $attributes = Attribute::find()->indexBy('id')->all();
+
+        foreach (array_diff_key($attributes, $values) as $attribute) {
+            $values[] = new Value(['attribute_id' => $attribute->id]);
+        }
+
+        foreach ($values as $value) {
+            $value->setScenario(Value::SCENARIO_TABULAR);
+        }
+
+        $post = Yii::$app->request->post();
+
+        if ($model->load($post) && $model->save() && Model::loadMultiple($values, $post)) {
+            foreach ($values as $value) {
+                $value->product_id = $model->id;
+                if ($value->validate()) {
+                    if (!empty($value->value)) {
+                        $value->save(false);
+                    } else {
+                        $value->delete();
+                    }
+                }
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'values' => $values,
             ]);
         }
     }

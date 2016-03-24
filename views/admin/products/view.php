@@ -47,24 +47,15 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
-    <p>
-        <?= Html::a('Добавить значение', ['admin/values/create', 'product_id' => $model->id], ['class' => 'btn btn-primary']) ?>
-    </p>
-
     <?= GridView::widget([
         'dataProvider' => new ActiveDataProvider(['query' => $model->getValues()]),
+        'layout' => "{items}\n{pager}",
         'columns' => [
-
             [
                 'attribute' => 'attribute_id',
                 'value' => 'productAttribute.name',
             ],
             'value',
-
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'controller' => 'admin/values',
-            ],
         ],
     ]); ?>
 

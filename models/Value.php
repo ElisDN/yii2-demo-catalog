@@ -17,6 +17,8 @@ use yii\db\ActiveRecord;
  */
 class Value extends ActiveRecord
 {
+    const SCENARIO_TABULAR = 'tabular';
+
     /**
      * @inheritdoc
      */
@@ -31,7 +33,8 @@ class Value extends ActiveRecord
     public function rules()
     {
         return [
-            [['product_id', 'attribute_id', 'value'], 'required'],
+            [['product_id', 'attribute_id'], 'required'],
+            [['value'], 'required', 'except' => self::SCENARIO_TABULAR],
             [['product_id', 'attribute_id'], 'integer'],
             [['value'], 'string', 'max' => 255],
             [['attribute_id'], 'exist', 'skipOnError' => true, 'targetClass' => Attribute::className(), 'targetAttribute' => ['attribute_id' => 'id']],
