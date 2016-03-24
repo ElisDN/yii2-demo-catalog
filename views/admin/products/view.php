@@ -43,6 +43,10 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+    <p>
+        <?= Html::a('Добавить значение', ['admin/values/create', 'product_id' => $model->id], ['class' => 'btn btn-primary']) ?>
+    </p>
+
     <?= GridView::widget([
         'dataProvider' => new ActiveDataProvider(['query' => $model->getValues()]),
         'columns' => [
