@@ -2,13 +2,21 @@
 
 namespace app\controllers;
 
+use app\models\Product;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 
 class CatalogController extends Controller
 {
     public function actionIndex()
     {
-        return $this->render('index');
+        $dataProvider = new ActiveDataProvider([
+            'query' => Product::find()->active()->orderBy(['id' => SORT_DESC]),
+        ]);
+
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     public function actionCategory()

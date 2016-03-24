@@ -1,18 +1,19 @@
 <?php
 
 namespace app\models\query;
+use yii\db\ActiveQuery;
 
 /**
  * This is the ActiveQuery class for [[\app\models\Product]].
  *
  * @see \app\models\Product
  */
-class ProductQuery extends \yii\db\ActiveQuery
+class ProductQuery extends ActiveQuery
 {
-    /*public function active()
+    public function active()
     {
-        return $this->andWhere('[[status]]=1');
-    }*/
+        return $this->andWhere(['active' => true]);
+    }
 
     /**
      * @inheritdoc
