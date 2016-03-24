@@ -45,8 +45,8 @@ class Value extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'product_id' => 'Product ID',
-            'attribute_id' => 'Attribute ID',
+            'product_id' => 'Product',
+            'attribute_id' => 'Attribute',
             'value' => 'Value',
         ];
     }

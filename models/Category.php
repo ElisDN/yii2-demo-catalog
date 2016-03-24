@@ -47,7 +47,7 @@ class Category extends ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
-            'parent_id' => 'Parent ID',
+            'parent_id' => 'Parent',
         ];
     }
 

@@ -43,8 +43,8 @@ class ProductTag extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'product_id' => 'Product ID',
-            'tag_id' => 'Tag ID',
+            'product_id' => 'Product',
+            'tag_id' => 'Tag',
         ];
     }
 
