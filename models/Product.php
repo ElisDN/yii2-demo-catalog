@@ -139,18 +139,16 @@ class Product extends ActiveRecord
         $currentTagIds = $this->getTags()->select('id')->column();
         $newTagIds = $this->getTagsArray();
 
+        $toInsert = [];
         foreach (array_filter(array_diff($newTagIds, $currentTagIds)) as $tagId) {
-            /** @var Tag $tag */
-            if ($tag = Tag::findOne($tagId)) {
-                $this->link('tags', $tag);
-            }
+            $toInsert[] = ['product_id' => $this->id, 'tag_id' => $tagId];
+        }
+        if ($toInsert) {
+            ProductTag::getDb()->createCommand()->batchInsert(ProductTag::tableName(), ['product_id', 'tag_id'], $toInsert)->execute();
         }
 
-        foreach (array_filter(array_diff($currentTagIds, $newTagIds)) as $tagId) {
-            /** @var Tag $tag */
-            if ($tag = Tag::findOne($tagId)) {
-                $this->unlink('tags', $tag, true);
-            }
+        if ($toRemove = array_filter(array_diff($currentTagIds, $newTagIds))) {
+            ProductTag::deleteAll(['product_id' => $this->id, 'tag_id' => $toRemove]);
         }
     }
 }
