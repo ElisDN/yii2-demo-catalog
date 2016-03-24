@@ -29,6 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'attribute_id',
                 'filter' => Attribute::find()->select(['name', 'id'])->indexBy('id')->column(),
+                'value' => 'attribute.name',
             ],
             'value',
 

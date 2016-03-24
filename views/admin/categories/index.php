@@ -29,6 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'parent_id',
                 'filter' => Category::find()->select(['name', 'id'])->indexBy('id')->column(),
+                'value' => 'parent.name',
             ],
 
             ['class' => 'yii\grid\ActionColumn'],

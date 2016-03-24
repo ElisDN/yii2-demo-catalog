@@ -28,10 +28,12 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'product_id',
                 'filter' => Product::find()->select(['name', 'id'])->indexBy('id')->column(),
+                'value' => 'product.name',
             ],
             [
                 'attribute' => 'tag_id',
                 'filter' => Tag::find()->select(['name', 'id'])->indexBy('id')->column(),
+                'value' => 'tag.name',
             ],
 
             ['class' => 'yii\grid\ActionColumn'],
