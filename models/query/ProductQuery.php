@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models\query;
+use app\models\Category;
 use yii\db\ActiveQuery;
 
 /**
@@ -13,6 +14,20 @@ class ProductQuery extends ActiveQuery
     public function active()
     {
         return $this->andWhere(['active' => true]);
+    }
+
+    /**
+     * @param integer $id
+     * @return self
+     */
+    public function forCategory($id)
+    {
+        $ids = [$id];
+        $childrenIds = [$id];
+        while ($childrenIds = Category::find()->select('id')->andWhere(['parent_id' => $childrenIds])->column()) {
+            $ids = array_merge($ids, $childrenIds);
+        }
+        return $this->andWhere(['category_id' => array_unique($ids)]);
     }
 
     /**
