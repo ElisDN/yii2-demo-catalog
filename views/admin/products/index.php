@@ -38,6 +38,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'price',
             [
                 'label' => 'Tags',
+                'attribute' => 'tag_id',
+                'filter' => Tag::find()->select(['name', 'id'])->indexBy('id')->column(),
                 'value' => function (Product $product) {
                         return implode(', ', ArrayHelper::map($product->tags, 'id', 'name'));
                     },
