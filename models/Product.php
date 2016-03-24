@@ -5,6 +5,7 @@ namespace app\models;
 use app\models\query\ProductQuery;
 use Yii;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%product}}".
@@ -41,6 +42,7 @@ class Product extends ActiveRecord
             [['category_id', 'price', 'active'], 'integer'],
             [['name', 'price'], 'required'],
             [['content'], 'string'],
+            [['tagsArray'], 'safe'],
             [['name'], 'string', 'max' => 255],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['category_id' => 'id']],
         ];
@@ -58,6 +60,7 @@ class Product extends ActiveRecord
             'content' => 'Content',
             'price' => 'Price',
             'active' => 'Active',
+            'tagsArray' => 'Tags',
         ];
     }
 
@@ -108,5 +111,20 @@ class Product extends ActiveRecord
     public static function find()
     {
         return new ProductQuery(get_called_class());
+    }
+
+    private $_tagsArray;
+
+    public function getTagsArray()
+    {
+        if ($this->_tagsArray === null) {
+            $this->_tagsArray = $this->getTags()->select('id')->column();
+        }
+        return $this->_tagsArray;
+    }
+
+    public function setTagsArray($value)
+    {
+        $this->_tagsArray = (array)$value;
     }
 }
