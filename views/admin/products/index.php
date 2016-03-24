@@ -2,6 +2,7 @@
 
 use app\models\Category;
 use app\models\Product;
+use app\models\Tag;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\grid\GridView;
@@ -35,6 +36,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'content:ntext',
             'price',
+            [
+                'label' => 'Tags',
+                'value' => function (Product $product) {
+                        return implode(', ', ArrayHelper::map($product->tags, 'id', 'name'));
+                    },
+            ],
             [
                 'attribute' => 'active',
                 'filter' => [0 => 'Нет', 1 => 'Да'],

@@ -40,6 +40,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'content:ntext',
             'price',
             'active:boolean',
+            [
+                'label' => 'Tags',
+                'value' => implode(', ', ArrayHelper::map($model->tags, 'id', 'name')),
+            ],
         ],
     ]) ?>
 

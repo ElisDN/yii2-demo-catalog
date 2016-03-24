@@ -41,7 +41,7 @@ class ProductSearch extends Product
      */
     public function search($params)
     {
-        $query = Product::find()->with(['category']);
+        $query = Product::find()->with(['category', 'tags']);
 
         // add conditions that should always apply here
 
