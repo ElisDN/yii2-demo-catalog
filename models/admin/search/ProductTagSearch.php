@@ -40,7 +40,7 @@ class ProductTagSearch extends ProductTag
      */
     public function search($params)
     {
-        $query = ProductTag::find();
+        $query = ProductTag::find()->with(['product', 'tag']);
 
         // add conditions that should always apply here
 

@@ -41,7 +41,7 @@ class ValueSearch extends Value
      */
     public function search($params)
     {
-        $query = Value::find();
+        $query = Value::find()->with(['product', 'productAttribute']);
 
         // add conditions that should always apply here
 
