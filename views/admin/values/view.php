@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'attribute_id',
-                'value' => ArrayHelper::getValue($model, 'attribute.name'),
+                'value' => ArrayHelper::getValue($model, 'productAttribute.name'),
             ],
             'value',
         ],
