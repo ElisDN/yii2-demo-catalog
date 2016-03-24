@@ -50,9 +50,13 @@ class CatalogController extends Controller
         ]);
     }
 
-    public function actionView()
+    public function actionView($id)
     {
-        return $this->render('view');
+        $model = $this->findProductModel($id);
+
+        return $this->render('view', [
+            'model' => $model,
+        ]);
     }
 
     /**
@@ -77,6 +81,20 @@ class CatalogController extends Controller
     protected function findTagModel($name)
     {
         if (($model = Tag::findOne(['name' => $name])) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+
+    /**
+     * @param integer $id
+     * @return Product the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findProductModel($id)
+    {
+        if (($model = Product::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
