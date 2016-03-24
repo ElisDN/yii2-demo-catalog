@@ -1,5 +1,7 @@
 <?php
 
+use app\models\Attribute;
+use app\models\Product;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -12,9 +14,9 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'product_id')->textInput() ?>
+    <?= $form->field($model, 'product_id')->dropDownList(Product::find()->select(['name', 'id'])->indexBy('id')->column()) ?>
 
-    <?= $form->field($model, 'attribute_id')->textInput() ?>
+    <?= $form->field($model, 'attribute_id')->dropDownList(Attribute::find()->select(['name', 'id'])->indexBy('id')->column()) ?>
 
     <?= $form->field($model, 'value')->textInput(['maxlength' => true]) ?>
 
