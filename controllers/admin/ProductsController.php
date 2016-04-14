@@ -144,7 +144,7 @@ class ProductsController extends Controller
         $attributes = Attribute::find()->indexBy('id')->all();
 
         foreach (array_diff_key($attributes, $values) as $attribute) {
-            $values[] = new Value(['attribute_id' => $attribute->id]);
+            $values[$attribute->id] = new Value(['attribute_id' => $attribute->id]);
         }
 
         foreach ($values as $value) {
