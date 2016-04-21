@@ -45,7 +45,7 @@ class CategorySearch extends Category
         $query = Category::find()
             ->select(['{{%category}}.*', 'products_count' => new Expression('COUNT({{%product}}.id)')])
             ->joinWith(['products'], false)
-            ->groupBy('{{category}}.id')
+            ->groupBy('{{%category}}.id')
             ->with(['parent']);
 
         // add conditions that should always apply here
