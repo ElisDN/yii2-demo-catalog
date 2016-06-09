@@ -43,6 +43,9 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'catalog' => 'catalog/index',
+                'catalog/<id:\d+>' => 'catalog/view',
+                'catalog/<id:\d+>/<_a:\[\w-]+>' => 'catalog/<_a>',
             ],
         ],
     ],
