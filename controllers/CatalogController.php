@@ -36,9 +36,9 @@ class CatalogController extends Controller
         ]);
     }
 
-    public function actionTag($name)
+    public function actionTag($tag)
     {
-        $tag = $this->findTagModel($name);
+        $tag = $this->findTagModel($tag);
 
         $dataProvider = new ActiveDataProvider([
             'query' => Product::find()->active()->forTag($tag->id)->orderBy(['id' => SORT_DESC]),
