@@ -11,6 +11,7 @@ $this->title = $tag->name;
 
 $this->params['breadcrumbs'][] = ['label' => 'Catalog', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+$this->params['tag'] = $tag;
 ?>
 <div class="catalog-index">
 

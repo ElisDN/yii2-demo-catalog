@@ -11,6 +11,8 @@ use yii\web\NotFoundHttpException;
 
 class CatalogController extends Controller
 {
+    public $layout = 'catalog';
+
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([

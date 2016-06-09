@@ -19,6 +19,7 @@ while ($parent = $parent->parent) {
 $this->params['breadcrumbs'] = array_merge($this->params['breadcrumbs'], array_reverse($crumbs));
 
 $this->params['breadcrumbs'][] = $this->title;
+$this->params['category'] = $category;
 ?>
 <div class="catalog-index">
 

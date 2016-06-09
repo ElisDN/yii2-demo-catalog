@@ -93,3 +93,7 @@ a.desc:after {
 h1 {
     margin-top: 0;
 }
+
+.nav ul {
+    margin-left: 20px;
+}
