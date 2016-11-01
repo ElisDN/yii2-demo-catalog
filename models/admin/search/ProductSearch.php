@@ -43,7 +43,7 @@ class ProductSearch extends Product
      */
     public function search($params)
     {
-        $query = Product::find()->with(['category', 'tags'])->joinWith(['productTags'], false);
+        $query = Product::find()->with(['category', 'tags'])->joinWith(['productTags'], false)->groupBy('id');
 
         // add conditions that should always apply here
 
