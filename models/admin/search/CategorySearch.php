@@ -64,11 +64,11 @@ class CategorySearch extends Category
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
+            '{{%category}}.id' => $this->id,
             'parent_id' => $this->parent_id,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name]);
+        $query->andFilterWhere(['like', '{{%category}}.name', $this->name]);
 
         return $dataProvider;
     }
